@@ -40,3 +40,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+# Just a reason for a commit
