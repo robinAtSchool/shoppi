@@ -8,12 +8,14 @@ import {FirebaseUISignInSuccess} from 'firebaseui-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loggedIn = false;
+  loggedIn;
 
   constructor(public afAuth: AngularFireAuth) {}
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
+    this.afAuth.authState.subscribe(response => {
+      this.loggedIn = !!response;
+    });
   }
 
   logout() {
@@ -22,15 +24,5 @@ export class AppComponent implements OnInit {
 
   successCallback(data: FirebaseUISignInSuccess) {
     console.log(data);
-  }
-
-  private firebaseAuthChangeListener(response) {
-    if (response) {
-      console.log('logged in');
-      this.loggedIn = true;
-    } else {
-      console.log('logged out');
-      this.loggedIn = false;
-    }
   }
 }
