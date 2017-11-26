@@ -1,8 +1,6 @@
-<ng-template *ngIf="loggedIn; else login">
-  <span>app</span>
+<div *ngIf="loggedIn; else login;">
   <router-outlet></router-outlet>
-</ng-template>
+</div>
 <ng-template #login>
-  <span>firebase</span>
   <firebase-ui (signInSuccess)="successCallback($event)"></firebase-ui>
 </ng-template>

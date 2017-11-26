@@ -1,8 +1,8 @@
 export class Product {
   name: string;
-  brand: {};
+  brand: string;
   description: string;
-  labels: {};
-  specs: {};
-  availlable: number;
+  labels: {[k: string]: any};
+  specs: {[k: string]: any};
+  available: number;
 }

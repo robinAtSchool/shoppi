@@ -1,3 +1,3 @@
 export class Brand {
-  products: {};
+  products: {[k: string]: any};
 }

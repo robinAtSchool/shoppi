@@ -2,5 +2,5 @@ export class Order {
   orderGiver: string;
   orderDate: string;
   isPayed: boolean;
-  products: {};
+  products: {[k: string]: any};
 }

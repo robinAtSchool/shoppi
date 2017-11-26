@@ -9,6 +9,8 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {AuthMethods, AuthProvider, FirebaseUIAuthConfig, FirebaseUIModule, CredentialHelper} from 'firebaseui-angular';
 import {AppRoutingModule} from './app-routing.module';
+import {AdminModule} from './admin/admin.module';
+import {OverviewModule} from './overview/overview.module';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -29,7 +31,9 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    AdminModule,
+    OverviewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
