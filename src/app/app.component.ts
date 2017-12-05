@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FirebaseUISignInSuccess} from 'firebaseui-angular';
-import {User} from "./models/user";
-import {AngularFireDatabase} from "angularfire2/database";
+import {User} from './models/user';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,9 @@ import {AngularFireDatabase} from "angularfire2/database";
 export class AppComponent implements OnInit {
   loggedIn;
   user: User;
+  search: string;
 
-  constructor(public afAuth: AngularFireAuth, private db: AngularFireDatabase) {}
+  constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase) {}
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(response => {
@@ -29,6 +31,8 @@ export class AppComponent implements OnInit {
         console.log('auth listener: logged out');
       }
     });
+
+    this.search = '';
   }
 
   logout() {
@@ -37,5 +41,9 @@ export class AppComponent implements OnInit {
 
   successCallback(data: FirebaseUISignInSuccess) {
     console.log(data);
+  }
+
+  onProductSearch() {
+    this.route.navigate(['/overview', this.search]);
   }
 }

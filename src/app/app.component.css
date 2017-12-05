@@ -1,0 +1,17 @@
+nav {
+  background-color: tomato;
+}
+
+div.router-container {
+  padding: 40px;
+}
+
+.product-search {
+  padding: 8px 40px;
+  float: right;
+}
+
+.product-search > input {
+  width: auto;
+  display: inline;
+}

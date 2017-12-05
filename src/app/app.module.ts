@@ -11,6 +11,8 @@ import {AuthMethods, AuthProvider, FirebaseUIAuthConfig, FirebaseUIModule, Crede
 import {AppRoutingModule} from './app-routing.module';
 import {AdminModule} from './admin/admin.module';
 import {OverviewModule} from './overview/overview.module';
+import {HomeModule} from './home/home.module';
+import {FormsModule} from '@angular/forms';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -32,6 +34,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    FormsModule,
+    HomeModule,
     AdminModule,
     OverviewModule
   ],
