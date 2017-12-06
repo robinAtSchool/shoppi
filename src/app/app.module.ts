@@ -13,6 +13,7 @@ import {AdminModule} from './admin/admin.module';
 import {OverviewModule} from './overview/overview.module';
 import {HomeModule} from './home/home.module';
 import {FormsModule} from '@angular/forms';
+import {ProductModule} from './product/product.module';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -37,7 +38,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     FormsModule,
     HomeModule,
     AdminModule,
-    OverviewModule
+    OverviewModule,
+    ProductModule
   ],
   providers: [],
   bootstrap: [AppComponent]
