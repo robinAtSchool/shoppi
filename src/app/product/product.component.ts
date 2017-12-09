@@ -12,6 +12,7 @@ import {Product} from '../models/product';
 export class ProductComponent implements OnInit {
 
   product: Product;
+  productKey: string;
 
 
   constructor(private route: ActivatedRoute, private db: AngularFireDatabase) { }
@@ -20,13 +21,12 @@ export class ProductComponent implements OnInit {
     this.product = new Product();
 
     this.route.params.subscribe(params => {
-      const productKey: string = params['key'];
-      const productRef = this.db.database.ref('products/' + productKey);
+      this.productKey = params['key'];
+      const productRef = this.db.database.ref('products/' + this.productKey);
 
       productRef.on('value', snapshot => {
         this.product = <Product> snapshot.val();
       });
     });
   }
-
 }

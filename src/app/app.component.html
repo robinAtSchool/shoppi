@@ -1,14 +1,14 @@
-<div *ngIf="loggedIn; else login;">
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<div *ngIf="fireUser; else login;">
+  <nav class="page-side-space navbar navbar-toggleable-md navbar-light bg-faded">
     <a class="navbar-brand" routerLink="/">STORE</a>
 
-    <div class="product-search collapse navbar-collapse" id="navbarSupportedContent">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="search">
-      <button class="btn btn-outline-success my-2 my-sm-0" (click)="onProductSearch()">Search</button>
+    <div class="product-search" id="navbarSupportedContent">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="search" (keyup.enter)="onProductSearch()">
+      <button class="btn btn-success my-2 my-sm-0" (click)="onProductSearch()">Search</button>
     </div>
   </nav>
 
-  <div class="router-container">
+  <div class="page-side-space router-container">
     <router-outlet></router-outlet>
   </div>
 </div>
