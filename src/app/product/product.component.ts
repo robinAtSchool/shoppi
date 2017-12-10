@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../models/product';
+import {AppGlobalService} from '../app.global.service';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +16,7 @@ export class ProductComponent implements OnInit {
   productKey: string;
 
 
-  constructor(private route: ActivatedRoute, private db: AngularFireDatabase) { }
+  constructor(private route: ActivatedRoute, private db: AngularFireDatabase, private globalService: AppGlobalService) { }
 
   ngOnInit() {
     this.product = new Product();
@@ -28,5 +29,10 @@ export class ProductComponent implements OnInit {
         this.product = <Product> snapshot.val();
       });
     });
+  }
+
+
+  buy() {
+    this.globalService.addToCart(this.productKey);
   }
 }

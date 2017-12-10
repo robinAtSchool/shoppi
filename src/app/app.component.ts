@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FirebaseUISignInSuccess} from 'firebaseui-angular';
-import {User} from './models/user';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Router} from '@angular/router';
-import * as firebase from 'firebase';
 import {AppGlobalService} from './app.global.service';
 
 
