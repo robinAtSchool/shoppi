@@ -5,6 +5,7 @@ import {User} from './models/user';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
+import {AppGlobalService} from './app.global.service';
 
 
 @Component({
@@ -13,11 +14,10 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  fireUser: firebase.User;
-  user: User;
   search: string;
+  loggedIn: boolean;
 
-  constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase, private globalService: AppGlobalService) {
     /* TODO may we implement a loading spinner
     route.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -35,25 +35,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(authUser => {
-      this.fireUser = authUser;
-
-      // Check if user is signed in
-      if (this.fireUser) {
-        // Get user profile
-        const userRef = this.db.database.ref('users/' + this.fireUser.uid);
-        userRef.once('value').then(userData => {
-          if (userData.val()) {
-            this.user = userData.val();
-          } else {
-            // Create new user profile
-            this.user = new User();
-            this.user.name = this.fireUser.displayName;
-            userRef.set(this.user);
-          }
-        });
-      } else {
-        this.user = null;
-      }
+      this.globalService.auth(authUser).then(response => this.loggedIn = response);
     });
 
     this.search = '';

@@ -14,6 +14,7 @@ import {OverviewModule} from './overview/overview.module';
 import {HomeModule} from './home/home.module';
 import {FormsModule} from '@angular/forms';
 import {ProductModule} from './product/product.module';
+import {AppGlobalService} from './app.global.service';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -41,7 +42,9 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     OverviewModule,
     ProductModule
   ],
-  providers: [],
+  providers: [
+    AppGlobalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
