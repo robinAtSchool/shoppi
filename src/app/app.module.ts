@@ -15,6 +15,7 @@ import {HomeModule} from './home/home.module';
 import {FormsModule} from '@angular/forms';
 import {ProductModule} from './product/product.module';
 import {AppGlobalService} from './app.global.service';
+import {CartModule} from './cart/cart.module';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -40,7 +41,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     HomeModule,
     AdminModule,
     OverviewModule,
-    ProductModule
+    ProductModule,
+    CartModule
   ],
   providers: [
     AppGlobalService
