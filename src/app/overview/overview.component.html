@@ -2,7 +2,7 @@
   <div *ngFor="let product of products" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div [routerLink]="['/product', product.key]" class="card product-card">
       <!-- TODO implement image -->
-      <img class="card-img-top" src="/assets/sample.png" alt="Card image cap">
+      <img class="card-img-top" src="{{product.value.imageUrl}}" alt="Card image cap">
       <div class="card-block">
         <h4 class="card-title">{{product.value.name}}</h4>
         <p class="card-text">{{product.value.brand}}</p>
