@@ -16,6 +16,7 @@ import {FormsModule} from '@angular/forms';
 import {ProductModule} from './product/product.module';
 import {AppGlobalService} from './app.global.service';
 import {CartModule} from './cart/cart.module';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -37,6 +38,7 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    AngularFontAwesomeModule,
     FormsModule,
     HomeModule,
     AdminModule,

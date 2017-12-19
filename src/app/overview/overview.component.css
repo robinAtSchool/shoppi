@@ -1,3 +1,7 @@
 div.product-card {
   cursor: pointer;
 }
+
+div.product-card-textblock {
+  margin-top: 1rem;
+}

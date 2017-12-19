@@ -16,3 +16,7 @@ div.router-container {
   width: auto;
   display: inline;
 }
+
+span.cart-items-badge {
+  margin-left: -15px;
+}

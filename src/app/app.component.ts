@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   search: string;
   loggedIn: boolean;
 
-  constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase, private globalService: AppGlobalService) {
+  constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase, public globalService: AppGlobalService) {
     /* TODO may we implement a loading spinner
     route.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -32,9 +32,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(authUser => {
+    // TODO move auth into globalService
+    /*this.afAuth.authState.subscribe(authUser => {
       this.globalService.auth(authUser).then(response => this.loggedIn = response);
-    });
+    });*/
 
     this.search = '';
   }

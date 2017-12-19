@@ -1,11 +1,11 @@
-<div class="row">
-  <div *ngFor="let product of products" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+<div class="card-columns">
+  <div *ngFor="let product of products">
     <div [routerLink]="['/product', product.key]" class="card product-card">
-      <!-- TODO implement image -->
       <img class="card-img-top" src="{{product.value.imageUrl}}" alt="Card image cap">
-      <div class="card-block">
+      <div class="card-block product-card-textblock">
+        <h6 class="card-title">{{product.value.brand}}</h6>
         <h4 class="card-title">{{product.value.name}}</h4>
-        <p class="card-text">{{product.value.brand}}</p>
+        <!--<p class="card-text">{{product.value.brand}}</p>-->
       </div>
     </div>
   </div>

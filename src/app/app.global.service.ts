@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import * as firebase from 'firebase';
 import {User} from './models/user';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 
 @Injectable()
@@ -10,49 +11,52 @@ export class AppGlobalService {
   public user: User;
 
 
-  constructor (private db: AngularFireDatabase) {}
+  constructor (private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
+    this.afAuth.authState.subscribe(authUser => {
+      this.fireUser = authUser;
 
-
-  public auth(authUser: firebase.User): Promise<boolean> {
-    this.fireUser = authUser;
-
-    // Check if user is signed in
-    if (this.fireUser) {
-      // Get user profile
-      const userRef = this.db.database.ref('users/' + this.fireUser.uid);
-      return userRef.once('value').then(userData => {
-        if (userData.val()) {
-          this.user = userData.val();
-        } else {
-          // Create new user profile
-          this.user = new User();
-          this.user.name = this.fireUser.displayName;
-          userRef.set(this.user);
-        }
-        return true;
-      });
-    } else {
-      this.user = null;
-      return new Promise(resolve => false);
-    }
+      // Check if user is signed in
+      if (this.fireUser) {
+        // Get user profile
+        const userRef = this.db.database.ref('users/' + this.fireUser.uid);
+        userRef.on('value', userData => {
+          if (userData.val()) {
+            this.user = userData.val();
+          } else {
+            // Create new user profile
+            this.user = new User();
+            this.user.name = this.fireUser.displayName;
+            userRef.set(this.user);
+          }
+        });
+      } else {
+        // TODO unsubscribe from userRef listener
+        this.user = null;
+      }
+    });
   }
 
+
   public addToCart(productKey: string) {
-    // Make sure cart property exists
-    if (!this.user.cart) {
-      this.user.cart = {};
-      console.log('cart property created');
-    }
+    if (this.user) {
+      // Make sure cart property exists
+      if (!this.user.cart) {
+        this.user.cart = {};
+        console.log('cart property created');
+      }
 
-    if (this.user.cart.hasOwnProperty(productKey)) {
-      // If product is already in cart, count nr of item up
-      this.user.cart[productKey]++;
+      if (this.user.cart.hasOwnProperty(productKey)) {
+        // If product is already in cart, count nr of item up
+        this.user.cart[productKey]++;
+      } else {
+        // Add new product to cart
+        this.user.cart[productKey] = 1;
+      }
+
+      const userRef = this.db.database.ref('users/' + this.fireUser.uid);
+      userRef.update(this.user);
     } else {
-      // Add new product to cart
-      this.user.cart[productKey] = 1;
+      console.error('Tried to add a product to cart while no user was logged in');
     }
-
-    const userRef = this.db.database.ref('users/' + this.fireUser.uid);
-    userRef.update(this.user);
   }
 }

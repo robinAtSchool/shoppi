@@ -18,7 +18,7 @@ export class OverviewComponent implements OnInit {
     this.products = [];
 
     this.route.params.subscribe(params => {
-      // TODO search query against Firebase (ask jenni)
+      // TODO search query against Firebase
       const searchKey: string = params['search'];
       const productRef = this.db.database.ref('products');
 

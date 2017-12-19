@@ -1,3 +1,15 @@
-<p>
-  cart works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <div *ngFor="let item of cartItems" class="card card-content-container">
+      <img src="{{item.product.imageUrl}}" class="product-image">
+
+      <div class="product-description">
+        <h6 class="brand-title">{{item.product.brand}}</h6>
+        <h2>{{item.product.name}}</h2>
+        <span>Quantity: {{item.qty}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-lg btn-primary">Checkout</button>
