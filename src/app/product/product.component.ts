@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../models/product';
 import {AppGlobalService} from '../app.global.service';
 
@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   productKey: string;
 
 
-  constructor(private route: ActivatedRoute, private db: AngularFireDatabase, public globalService: AppGlobalService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private db: AngularFireDatabase, public globalService: AppGlobalService) { }
 
   ngOnInit() {
     this.product = new Product();
@@ -38,5 +38,10 @@ export class ProductComponent implements OnInit {
 
   update() {
     this.globalService.updateProduct(this.productKey, this.product);
+  }
+
+  delete() {
+    this.router.navigate(['/']);
+    this.globalService.deleteProduct(this.productKey);
   }
 }

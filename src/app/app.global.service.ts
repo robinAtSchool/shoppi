@@ -70,4 +70,12 @@ export class AppGlobalService {
       }
     });
   }
+
+  public deleteProduct(productKey: string) {
+    this.db.database.ref('products/' + productKey).remove(error => {
+      if (error) {
+        console.error(error);
+      }
+    });
+  }
 }
