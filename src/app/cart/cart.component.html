@@ -6,7 +6,11 @@
       <div class="product-description">
         <h6 class="brand-title">{{item.product.brand}}</h6>
         <h2>{{item.product.name}}</h2>
-        <span>Quantity: {{item.qty}}</span>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary" (click)="decreaseQty(item)"><fa name="minus"></fa></button>
+          <a href="#" class="btn btn-secondary disabled" role="button" aria-disabled="true">{{item.qty}}</a>
+          <button type="button" class="btn btn-secondary" (click)="increaseQty(item)"><fa name="plus"></fa></button>
+        </div>
       </div>
     </div>
   </div>

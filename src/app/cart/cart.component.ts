@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AppGlobalService} from '../app.global.service';
 import {CartItem} from '../models/cart-item';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -14,7 +14,8 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[];
 
 
-  constructor(private db: AngularFireDatabase, private globalService: AppGlobalService) { }
+  constructor(private db: AngularFireDatabase, private globalService: AppGlobalService) {
+  }
 
 
   ngOnInit() {
@@ -29,5 +30,26 @@ export class CartComponent implements OnInit {
         });
       }
     });
+  }
+
+
+  increaseQty(item: CartItem) {
+    const newQty = item.qty + 1;
+    this.globalService.setCartItemQty(item.productKey, newQty);
+  }
+
+  decreaseQty(item: CartItem) {
+    const newQty = item.qty - 1;
+
+    // Remove product form cart if quantity hits 0
+    if (newQty <= 0) {
+      this.db.database.ref('/users/' + this.globalService.fireUser.uid + '/cart/' + item.productKey).remove(error => {
+        if (error) {
+          console.error(error);
+        }
+      });
+    } else {
+      this.globalService.setCartItemQty(item.productKey, newQty);
+    }
   }
 }

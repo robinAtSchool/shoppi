@@ -32,7 +32,6 @@ export class AppGlobalService {
           }
         });
       } else {
-        // TODO unsubscribe from userRef listener
         this.user = null;
       }
     });
@@ -60,6 +59,14 @@ export class AppGlobalService {
     } else {
       console.error('Tried to add a product to cart while no user was logged in');
     }
+  }
+
+  public setCartItemQty(productKey: string, qty: number) {
+    this.db.database.ref('/users/' + this.fireUser.uid + '/cart/' + productKey)
+      .set(qty)
+      .catch(rej => {
+        console.error(rej);
+      });
   }
 
   public updateProduct(productKey: string, product: Product) {
