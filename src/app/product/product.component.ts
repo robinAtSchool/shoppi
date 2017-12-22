@@ -14,12 +14,14 @@ export class ProductComponent implements OnInit {
 
   product: Product;
   productKey: string;
+  variants: { key: string, value: Product }[];
 
 
   constructor(private route: ActivatedRoute, private db: AngularFireDatabase, public globalService: AppGlobalService) { }
 
   ngOnInit() {
     this.product = new Product();
+    this.variants = [];
 
     this.route.params.subscribe(params => {
       this.productKey = params['key'];
@@ -27,6 +29,25 @@ export class ProductComponent implements OnInit {
 
       productRef.on('value', snapshot => {
         this.product = <Product> snapshot.val();
+        this.variants = [];
+
+        if (this.product.variantOf) {
+          console.log(this.product.variantOf);
+          const variantsRef = this.db.database.ref('variants/' + this.product.variantOf);
+          variantsRef.on('value', variantSnap => {
+            console.log(variantSnap.val());
+            const variantProductKeys: Array<string> = variantSnap.val();
+
+            variantProductKeys.forEach((item, index) => {
+              const variantProductRef = this.db.database.ref('products/' + item);
+              variantProductRef.on('value', productSnap => {
+                const variantProduct: Product = <Product>productSnap.val();
+                this.variants.push({key: item, value: variantProduct});
+                console.log(this.variants);
+              });
+            });
+          });
+        }
       });
     });
   }

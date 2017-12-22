@@ -31,6 +31,11 @@
         <h4 class="price">{{product.price}}</h4>
         <p>{{product.description}}</p>
         <button class="btn btn-warning btn-md" (click)="buy()">Add to Cart</button>
+
+        <div *ngIf="variants.length > 0" class="variants">
+          <img *ngFor="let variant of variants" src="{{variant.value.imageUrl}}" class="img-thumbnail variant-thumb"
+               [routerLink]="['/product/', variant.key]">
+        </div>
       </ng-template>
     </div>
   </div>

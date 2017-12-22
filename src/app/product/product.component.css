@@ -11,6 +11,20 @@ div.gallery-container {
 
 }
 
+div.gallery-container > img {
+  max-width: 100%;
+}
+
 div.intro-container {
 
+}
+
+div.variants {
+  margin-top: 30px;
+}
+
+img.variant-thumb {
+  height: 50px;
+  margin-right: 5px;
+  cursor: pointer;
 }

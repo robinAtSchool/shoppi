@@ -8,4 +8,5 @@ export class Product {
   specs: {[k: string]: any};
   available: number;
   isDeleted: boolean;
+  variantOf: string;
 }
