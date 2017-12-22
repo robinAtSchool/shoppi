@@ -17,6 +17,7 @@ import {ProductModule} from './product/product.module';
 import {AppGlobalService} from './app.global.service';
 import {CartModule} from './cart/cart.module';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {AdminGuard} from './admin.guard';
 
 
 const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
@@ -47,7 +48,8 @@ const firebaseUiAuthConfig: FirebaseUIAuthConfig = {
     CartModule
   ],
   providers: [
-    AppGlobalService
+    AppGlobalService,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

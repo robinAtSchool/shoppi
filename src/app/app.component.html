@@ -14,6 +14,13 @@
       </button>
       <!-- TODO items-in-cart badge
       <span class="badge badge-pill badge-danger cart-items-badge">3</span>-->
+      <button class="btn btn-outline-danger" (click)="logout()">
+        <fa name="sign-out"></fa>
+      </button>
+
+      <button *ngIf="globalService.user.isAdmin" class="btn btn-outline-info" routerLink="/admin">
+        <fa name="cogs"></fa>
+      </button>
     </div>
   </nav>
 

@@ -13,7 +13,6 @@ import {AppGlobalService} from './app.global.service';
 })
 export class AppComponent implements OnInit {
   search: string;
-  loggedIn: boolean;
 
   constructor(private route: Router, public afAuth: AngularFireAuth, private db: AngularFireDatabase, public globalService: AppGlobalService) {
     /* TODO may we implement a loading spinner
@@ -32,11 +31,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO move auth into globalService
-    /*this.afAuth.authState.subscribe(authUser => {
-      this.globalService.auth(authUser).then(response => this.loggedIn = response);
-    });*/
-
     this.search = '';
   }
 

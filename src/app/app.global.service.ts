@@ -26,6 +26,7 @@ export class AppGlobalService {
             // Create new user profile
             this.user = new User();
             this.user.name = this.fireUser.displayName;
+            this.user.isAdmin = false;
             userRef.set(this.user);
           }
         });

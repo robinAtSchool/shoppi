@@ -1,4 +1,5 @@
 export class User {
+  isAdmin: boolean;
   name: string;
   cart: {[k: string]: any};
   orders: {[k: string]: any};
