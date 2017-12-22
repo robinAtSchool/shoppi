@@ -29,6 +29,6 @@ export class AdminComponent implements OnInit {
   }
 
   migrate() {
-    this.dbService.migrate('/products', '/articles');
+    this.dbService.migrate('/articles', '/products');
   }
 }
