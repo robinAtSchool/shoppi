@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
 
   addProduct() {
     this.newProduct.imageUrl = this.newProduct.imageUrl === undefined ? 'assets/sample.png' : this.newProduct.imageUrl;
+    this.newProduct.isDeleted = false;
     this.dbService.addProduct(this.newProduct);
   }
 

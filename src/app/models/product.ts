@@ -7,4 +7,5 @@ export class Product {
   labels: {[k: string]: any};
   specs: {[k: string]: any};
   available: number;
+  isDeleted: boolean;
 }

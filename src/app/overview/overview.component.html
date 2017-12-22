@@ -1,6 +1,6 @@
 <div class="card-columns">
   <div *ngFor="let product of products">
-    <div [routerLink]="['/product', product.key]" class="card product-card">
+    <div *ngIf="!product.value.isDeleted" [routerLink]="['/product', product.key]" class="card product-card">
       <img class="card-img-top" src="{{product.value.imageUrl}}" alt="Card image cap">
       <div class="card-block product-card-textblock">
         <h6 class="card-title">{{product.value.brand}}</h6>
