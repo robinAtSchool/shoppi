@@ -4,11 +4,33 @@
       <img src="{{product.imageUrl}}">
     </div>
     <div class="intro-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
-      <h6 class="brand-title">{{product.brand}}</h6>
-      <h2>{{product.name}}</h2>
-      <h4 class="price">{{product.price}}</h4>
-      <p>{{product.description}}</p>
-      <button class="button btn-warning btn-md" (click)="buy()">Add to Cart</button>
+      <div *ngIf="globalService.user.isAdmin; else client">
+        <div class="form-group">
+          <h6 class="brand-title">{{product.brand}}</h6>
+          <input class="form-control" type="text" [(ngModel)]="product.brand">
+        </div>
+        <div class="form-group">
+          <h2>{{product.name}}</h2>
+          <input class="form-control" type="text" [(ngModel)]="product.name">
+        </div>
+        <div class="form-group">
+          <h4 class="price">{{product.price}}</h4>
+          <input class="form-control" type="number" [(ngModel)]="product.price">
+        </div>
+        <div class="form-group">
+          <label>{{product.description}}</label>
+          <input class="form-control" type="text" [(ngModel)]="product.description">
+        </div>
+        <button class="btn btn-warning btn-md" (click)="update()">Update Product</button>
+      </div>
+
+      <ng-template #client>
+        <h6 class="brand-title">{{product.brand}}</h6>
+        <h2>{{product.name}}</h2>
+        <h4 class="price">{{product.price}}</h4>
+        <p>{{product.description}}</p>
+        <button class="btn btn-warning btn-md" (click)="buy()">Add to Cart</button>
+      </ng-template>
     </div>
   </div>
 </div>

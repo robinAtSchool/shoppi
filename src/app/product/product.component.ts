@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   productKey: string;
 
 
-  constructor(private route: ActivatedRoute, private db: AngularFireDatabase, private globalService: AppGlobalService) { }
+  constructor(private route: ActivatedRoute, private db: AngularFireDatabase, public globalService: AppGlobalService) { }
 
   ngOnInit() {
     this.product = new Product();
@@ -34,5 +34,9 @@ export class ProductComponent implements OnInit {
 
   buy() {
     this.globalService.addToCart(this.productKey);
+  }
+
+  update() {
+    this.globalService.updateProduct(this.productKey, this.product);
   }
 }

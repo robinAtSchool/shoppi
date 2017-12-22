@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import {User} from './models/user';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {Product} from './models/product';
 
 
 @Injectable()
@@ -59,5 +60,14 @@ export class AppGlobalService {
     } else {
       console.error('Tried to add a product to cart while no user was logged in');
     }
+  }
+
+  public updateProduct(productKey: string, product: Product) {
+    const productRef = this.db.database.ref('products/' + productKey);
+    productRef.update(product, error => {
+      if (error) {
+        console.error(error);
+      }
+    });
   }
 }
